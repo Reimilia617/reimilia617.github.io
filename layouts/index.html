@@ -1,0 +1,37 @@
+{{ define "main" }}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+
+<!-- 全屏首屏图：中央仅一行与背景颜色相反的对比字幕 -->
+<header class="hero">
+  <div class="hero-media">
+    <img src="{{ site.Params.hero | relURL }}" alt="">
+  </div>
+  <div class="hero-fade" aria-hidden="true"></div>
+  <div class="hero-caption">
+    <span>{{ site.Params.heroSubtitle }}</span>
+  </div>
+</header>
+
+<!-- 向下滚动进入的博客内容区 -->
+<section class="posts-section" id="posts">
+  <div class="container">
+    <div class="section-title">
+      <h2>文章</h2>
+      <span class="count">共 {{ len $posts }} 篇 · 按发布时间倒序</span>
+    </div>
+
+    {{ if $posts }}
+    <div class="post-list">
+      {{ range $posts.ByDate.Reverse }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="empty-card">还没有文章。在 <code>content/posts/</code> 下新建一篇即可，详见 README。</div>
+    {{ end }}
+  </div>
+</section>
+
+{{ partial "footer.html" . }}
+{{ partial "fab-group.html" . }}
+{{ end }}

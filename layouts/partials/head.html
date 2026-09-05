@@ -1,0 +1,50 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+
+{{- $desc := "" }}
+{{- if .IsHome }}
+  {{- $desc = site.Params.description | default site.Title }}
+{{- else }}
+  {{- $desc = .Description | default (.Summary | plainify) }}
+{{- end }}
+<meta name="description" content="{{ $desc | truncate 160 }}">
+<meta name="author" content="{{ site.Params.author }}">
+<meta name="generator" content="Hugo">
+
+<link rel="icon" href="{{ "img/avatar.svg" | relURL }}" type="image/svg+xml">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ "index.xml" | relURL }}">
+
+<!-- Open Graph -->
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ .Title | default site.Title }}">
+<meta property="og:description" content="{{ $desc | truncate 200 }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{- with .Params.cover }}
+<meta property="og:image" content="{{ . | absURL }}">
+{{- else }}
+<meta property="og:image" content="{{ site.Params.avatar | absURL }}">
+{{- end }}
+<meta name="twitter:card" content="summary">
+
+<meta name="theme-color" content="#0061a4">
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+<!-- 防闪烁：渲染前先按本地存储/系统偏好确定明暗主题 -->
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("md3-theme");
+      if (!t) {
+        t = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+      document.documentElement.dataset.theme = t;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>

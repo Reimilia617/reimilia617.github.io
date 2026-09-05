@@ -1,0 +1,32 @@
+# ============================================================
+# Reimilia617 个人博客 · Hugo 配置
+# 站点级个性化内容都在 [params] 里，改这里即可全局生效。
+# ============================================================
+
+# 部署后的正式域名（GitHub Pages 默认 username.github.io）
+# 若以后使用自定义域名，把这里改成你的域名即可。
+baseURL = 'https://reimilia617.github.io/'
+title = 'Reimilia617 · 个人博客'
+
+locale = 'zh-CN'
+defaultContentLanguage = 'zh'
+timeZone = 'Asia/Shanghai'
+
+enableRobotsTXT = true
+
+# 是否允许文章正文里直接写 HTML
+[markup.goldmark.renderer]
+  unsafe = true
+
+[taxonomies]
+  tag = 'tags'
+
+[params]
+  # ---- 以下为个性化信息，一键替换即可 ----
+  author        = 'Reimilia617'
+  github        = 'https://github.com/Reimilia617'
+  avatar        = '/img/avatar.svg'     # 头像（左侧栏/文章卡片作者处）
+  hero          = '/img/hero.svg'       # 首页全屏背景图
+  heroSubtitle  = '在代码与文字之间，记录我的世界'  # 首页中央唯一一行字幕
+  description   = 'Reimilia617 的个人博客 —— 记录技术、设计与生活。'
+  # ----------------------------------------

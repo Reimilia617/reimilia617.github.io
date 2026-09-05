@@ -1,0 +1,10 @@
+# Hugo 构建产物与缓存（由 GitHub Actions 自动构建，无需提交）
+/public
+/resources/_gen
+.hugo_build.lock
+
+# 编辑器 / 系统
+.DS_Store
+*.swp
+.idea/
+.vscode/

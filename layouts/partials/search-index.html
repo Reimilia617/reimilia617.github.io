@@ -1,0 +1,7 @@
+{{- /* 全站文章搜索索引：由 Hugo 在构建期生成，供 main.js 本地检索 */ -}}
+<script type="application/json" id="search-index">{{- $items := slice -}}
+{{- range site.RegularPages -}}
+  {{- $d := .Description | default (.Summary | plainify) -}}
+  {{- $items = $items | append (dict "title" .Title "url" .RelPermalink "desc" $d "tags" (.Params.tags | default slice) "date" (.Date.Format "2006-01-02")) -}}
+{{- end -}}
+{{- $items | jsonify | safeJS }}</script>

@@ -1,0 +1,112 @@
+{{ define "main" }}
+{{- $cover := .Params.cover | default "/img/covers/cover-hello.svg" -}}
+
+<!-- 前后篇：按发布时间倒序定位（新在上，旧在下） -->
+{{- $sorted := sort (where site.RegularPages "Section" "posts") "Date" "desc" -}}
+{{- $older := "" -}}
+{{- $newer := "" -}}
+{{- range $i, $p := $sorted -}}
+  {{- if eq $p.File.UniqueID $.File.UniqueID -}}
+    {{- if lt (add $i 1) (len $sorted) }}{{ $older = index $sorted (add $i 1) }}{{ end -}}
+    {{- if gt $i 0 }}{{ $newer = index $sorted (sub $i 1) }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+<main class="post-page">
+  <div class="container">
+    <!-- 三七开：左 30% 信息栏 | 右 70% 正文 -->
+    <div class="post-grid">
+
+      <!-- ================= 左栏 ================= -->
+      <aside class="post-aside">
+        <div class="side-card">
+          <div class="side-cover">
+            <img src="{{ $cover | relURL }}" alt="{{ .Title }} 封面">
+          </div>
+
+          <h1 class="side-title">{{ .Title }}</h1>
+
+          <div class="side-actions">
+            <div class="author-row">
+              <div class="avatar">
+                <img src="{{ site.Params.avatar | relURL }}" alt="{{ site.Params.author }} 的头像">
+              </div>
+              <div class="author-meta">
+                <div class="author-name">{{ site.Params.author }}</div>
+                <div class="author-tag">把想法写成文章</div>
+              </div>
+            </div>
+
+            <a class="btn btn-github" href="{{ site.Params.github }}"
+               target="_blank" rel="noopener">
+              {{ partial "icon.html" (dict "name" "github") }}
+              GitHub 主页
+            </a>
+
+            <hr class="divider">
+
+            <!-- 交互按钮：搜索 / 深浅色 / 回到顶部（与首页右下角同款） -->
+            <div class="side-controls">
+              {{ partial "search-widget.html" (dict "compact" true) }}
+              <div class="controls-row">
+                <button class="fab fab--s theme-fab" type="button" aria-label="切换深浅色" title="切换深浅色">
+                  {{ partial "icon.html" (dict "name" "sun" "class" "ico-sun") }}
+                  {{ partial "icon.html" (dict "name" "moon" "class" "ico-moon") }}
+                </button>
+                <button class="fab fab--s to-top" type="button" aria-label="回到顶端" title="回到顶端">
+                  {{ partial "icon.html" (dict "name" "arrow-up") }}
+                </button>
+              </div>
+            </div>
+
+            <a class="back-home" href="{{ "/" | relURL }}">
+              {{ partial "icon.html" (dict "name" "arrow-left") }}
+              返回首页
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ================= 右栏 ================= -->
+      <article class="article">
+        <header class="article-head">
+          <div class="chip-row">
+            <span class="meta">
+              {{ partial "icon.html" (dict "name" "calendar") }}
+              {{ .Date.Format "2006年1月2日" }}
+            </span>
+            <span class="meta">
+              {{ partial "icon.html" (dict "name" "clock") }}
+              约 {{ .ReadingTime }} 分钟
+            </span>
+            {{- range .Params.tags }}
+            <span class="chip">{{ . }}</span>
+            {{- end }}
+          </div>
+        </header>
+
+        <div class="prose">
+          {{ .Content }}
+        </div>
+
+        <nav class="post-nav">
+          {{ with $newer }}
+          <a class="prev" href="{{ .RelPermalink }}">
+            <span class="nav-label">← 更新的文章</span>
+            <span class="nav-title">{{ .Title }}</span>
+          </a>
+          {{ end }}
+          {{ with $older }}
+          <a class="next" href="{{ .RelPermalink }}">
+            <span class="nav-label">更早的文章 →</span>
+            <span class="nav-title">{{ .Title }}</span>
+          </a>
+          {{ end }}
+        </nav>
+      </article>
+    </div>
+  </div>
+</main>
+
+{{ partial "footer.html" . }}
+{{ end }}

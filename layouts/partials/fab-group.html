@@ -1,0 +1,13 @@
+{{- /* 右下角浮动按钮组：搜索 / 深色模式 / 回到顶端（下拉后出现） */ -}}
+<div class="fab-group">
+  {{ partial "search-widget.html" . }}
+
+  <button class="fab theme-fab" type="button" aria-label="切换到深色模式" title="切换深浅色">
+    {{ partial "icon.html" (dict "name" "sun" "class" "ico-sun") }}
+    {{ partial "icon.html" (dict "name" "moon" "class" "ico-moon") }}
+  </button>
+
+  <button class="fab to-top" type="button" aria-label="回到顶端" title="回到顶端">
+    {{ partial "icon.html" (dict "name" "arrow-up") }}
+  </button>
+</div>

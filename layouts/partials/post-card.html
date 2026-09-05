@@ -1,0 +1,30 @@
+{{- /* 博客列表中的单条文章卡片（纵向排版条目） */ -}}
+{{- $cover := .Params.cover | default "/img/covers/cover-hello.svg" -}}
+<a class="post-card" href="{{ .RelPermalink }}">
+  <div class="pc-media">
+    <img src="{{ $cover | relURL }}" alt="{{ .Title }} 封面" loading="lazy">
+  </div>
+  <div class="pc-body">
+    <h2 class="pc-title">{{ .Title }}</h2>
+    <div class="pc-meta">
+      <span>
+        {{ partial "icon.html" (dict "name" "calendar") }}
+        {{ .Date.Format "2006年1月2日" }}
+      </span>
+      <span>
+        {{ partial "icon.html" (dict "name" "clock") }}
+        阅读约 {{ .ReadingTime }} 分钟
+      </span>
+    </div>
+    <p class="pc-desc">
+      {{- .Description | default (.Summary | plainify) -}}
+    </p>
+    {{- with .Params.tags }}
+    <div class="pc-tags">
+      {{- range . }}
+      <span class="chip">{{ . }}</span>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</a>

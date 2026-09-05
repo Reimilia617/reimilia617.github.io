@@ -1,0 +1,22 @@
+{{- /* 左向展开式搜索组件。可传 { "compact": true } 得到文章页侧栏的小号版本 */ -}}
+{{- $compact := false -}}
+{{- if reflect.IsMap . }}{{ $compact = .compact | default false }}{{ end -}}
+<div class="search-widget" role="search">
+  <button class="fab sw-btn{{ if $compact }} fab--s{{ end }}" type="button" aria-label="搜索文章" title="搜索文章">
+    {{ partial "icon.html" (dict "name" "search") }}
+  </button>
+
+  <div class="search-bar">
+    <input type="search" placeholder="搜索标题 / 标签 / 摘要…" autocomplete="off"
+           aria-label="输入关键词搜索文章" spellcheck="false">
+    <button class="search-go" type="button" aria-label="执行搜索">
+      {{ partial "icon.html" (dict "name" "search") }}
+    </button>
+  </div>
+
+  <div class="search-results" aria-live="polite">
+    <div class="sr-head"></div>
+    <div class="sr-list"></div>
+    <div class="sr-empty" style="display:none">未找到相关文章，换个关键词试试</div>
+  </div>
+</div>

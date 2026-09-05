@@ -1,0 +1,30 @@
+{{ define "main" }}
+{{- $pages := .Pages.ByDate.Reverse -}}
+
+<main class="posts-section">
+  <div class="container">
+    <a class="crumb" href="{{ "/" | relURL }}">
+      {{ partial "icon.html" (dict "name" "arrow-left") }}
+      返回首页
+    </a>
+    <h1 class="list-title">{{ .Title }}</h1>
+
+    {{ with .Content }}
+    <div class="prose">{{ . }}</div>
+    {{ end }}
+
+    {{ if $pages }}
+    <div class="post-list">
+      {{ range $pages }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="empty-card">这里还没有内容。</div>
+    {{ end }}
+  </div>
+</main>
+
+{{ partial "footer.html" . }}
+{{ partial "fab-group.html" . }}
+{{ end }}

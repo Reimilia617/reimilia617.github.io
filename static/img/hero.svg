@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a2a6c"/>
+      <stop offset="0.45" stop-color="#2e6fb5"/>
+      <stop offset="0.75" stop-color="#3fa9c9"/>
+      <stop offset="1" stop-color="#6fd3c7"/>
+    </linearGradient>
+    <linearGradient id="blob1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c5cff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#7c5cff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="blob2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd86b" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffd86b" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+
+  <!-- 弥散光斑（MD3 式色彩堆叠） -->
+  <circle cx="260" cy="200" r="430" fill="url(#blob1)"/>
+  <circle cx="1680" cy="820" r="520" fill="url(#blob2)"/>
+  <circle cx="1520" cy="180" r="260" fill="url(#glow)"/>
+  <circle cx="300" cy="900" r="300" fill="url(#glow)" opacity="0.5"/>
+
+  <!-- 细环装饰 -->
+  <circle cx="0" cy="1080" r="560" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+  <circle cx="0" cy="1080" r="760" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+
+  <!-- 前景几何块 -->
+  <rect x="1720" y="120" width="340" height="340" rx="80" fill="#ffffff" fill-opacity="0.06" transform="rotate(18 1890 290)"/>
+  <rect x="-160" y="140" width="300" height="300" rx="60" fill="#ffffff" fill-opacity="0.05" transform="rotate(-14 -10 290)"/>
+</svg>
