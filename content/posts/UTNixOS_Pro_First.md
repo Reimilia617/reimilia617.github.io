@@ -3,6 +3,7 @@ title: '关于我是如何开发的UTNixOS_Pro？'
 date: 2026-09-05
 tags: [技术]
 description: 'UTNixOS_Pro不为人知的一面'
+cover: '/img/covers/UTNixOS_Pro.png'
 ---
 
 ## 我是怎么想出使用WebUI管理系统的方式？
